@@ -1,35 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Navigate, Route, Routes } from "react-router-dom";
+import { ModuleRoutes } from "../src/app/routes";
+import Home from "./app/pages/Home/Home";
+import Resumen from "./app/pages/Resumen/Resumen";
+import { FC, PropsWithChildren } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+const PrivateRoute: FC<PropsWithChildren> = ({ children }) => {
+  const user = {
+    id: 100,
+  };
 
+  if (user.id === 100) {
+    console.log("render");
+    return children;
+  }
+
+  return <Navigate to={`/${ModuleRoutes.Home}`} replace />;
+};
+
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Routes>
+      <Route path={ModuleRoutes.Home} element={<Home />} />
+      <Route
+        path={ModuleRoutes.Secundary}
+        element={
+          <PrivateRoute>
+            {/* <Secundary /> */}
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={`${ModuleRoutes.Resumen}/:productId`}
+        element={<Resumen />}
+      />
+      <Route path="*" element={<Navigate to={ModuleRoutes.Home} replace />} />
+    </Routes>
+  );
+};
 
-export default App
+export default App;

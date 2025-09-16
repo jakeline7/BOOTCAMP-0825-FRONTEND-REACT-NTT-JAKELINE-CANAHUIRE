@@ -9,13 +9,12 @@ import usePagination from "../../../shared/hooks/usePagination";
 const Home: React.FC = () => {
   const [nameSearch, setNameSearch] = useState("");
   const [products, setProducts] = useState<Products[] | null>(null);
-  const [productsSelected, setProductsSelected] = useState<Products[] | null>(null);
-
-  // ...
-const { currentPage, totalPages, currentData, setPage, resetPage } = usePagination<Products>(
-  productsSelected,
-  8
-);
+const [productsSelected, setProductsSelected] = useState<Products[]>([]);
+  
+  const { currentPage, totalPages, currentData, setPage, resetPage } = usePagination<Products>(
+    productsSelected,
+    8
+  );
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
@@ -24,7 +23,7 @@ const { currentPage, totalPages, currentData, setPage, resetPage } = usePaginati
     const newProducts =
       products?.filter((product) =>
         product.title.toLowerCase().includes(name.toLowerCase())
-      ) || products;
+      ) || [];
 
     setProductsSelected(newProducts);
     resetPage(); // vuelve a la página 1 al buscar

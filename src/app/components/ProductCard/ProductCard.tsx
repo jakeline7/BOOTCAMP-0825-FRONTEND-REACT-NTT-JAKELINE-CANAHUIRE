@@ -9,7 +9,7 @@ interface ProductCardI {
 
 const ProductCard: React.FC<ProductCardI> = ({ product }) => {
   const navigate = useNavigate();
-  const { title, category, images, id, price, stock } = product;
+  const { title, category, images, id, price } = product;
 
   const toProduct = (): void => {
     navigate(`${ModuleRoutes.Resumen}/${id}`);
@@ -25,9 +25,7 @@ const ProductCard: React.FC<ProductCardI> = ({ product }) => {
         <ProductCardStyled.Title>{title}</ProductCardStyled.Title>
         <ProductCardStyled.Category>{category}</ProductCardStyled.Category>
 
-        {/* 💲 Precio y 📦 Stock */}
         <ProductCardStyled.Price>S/ {price}</ProductCardStyled.Price>
-        {/* <ProductCardStyled.Stock>Stock: {stock}</ProductCardStyled.Stock> */}
 
         <ProductCardStyled.Button>AGREGAR</ProductCardStyled.Button>
       </ProductCardStyled.Header>

@@ -3,8 +3,6 @@ import styled from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  // align-items: center;
-  // align-items: flex-start;
   gap: 20px;
   max-width: 1200px;
   width: 100%;
@@ -30,6 +28,10 @@ const SearchInput = styled.input`
 
   &:focus {
     outline: none;
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
   }
 `;
 

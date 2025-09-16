@@ -7,7 +7,6 @@ const getProducts = async (): Promise<Products[]> => {
     const response = await fetch(`${productsApiUrl}/products`);
     const data = await response.json();
 
-    // la API devuelve { products: [...] }
     return data.products;
   } catch (error) {
     throw new Error("Products network error");
@@ -28,19 +27,7 @@ const getProduct = async (idProduct: string): Promise<Product> => {
   }
 };
 
-// const getPlanets = async (): Promise<OriginPlanet[]> => {
-//   try {
-//     const response = await fetch(`${productsApiUrl}/planets`);
-//     const data = await response.json();
-
-//     return data.items;
-//   } catch (error) {
-//     throw new Error("Planets network error");
-//   }
-// };
-
 export const productRequest = {
   getProduct,
   getProducts,
-  // getPlanets,
 };

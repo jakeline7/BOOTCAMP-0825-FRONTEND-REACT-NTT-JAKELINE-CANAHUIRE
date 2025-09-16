@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ColorApp } from "../../../shared/utils/color";
 
 const Container = styled.div`
   display: flex;
@@ -15,8 +16,8 @@ const ImageContainer = styled.figure`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 1px 1px 10px 5px #d2d2d2ff;
-  background-color: #ffffffff;
+  box-shadow: 1px 1px 10px 5px ${ColorApp['gris_claro']};
+  background-color: ${ColorApp['blanco']};
   border-radius: 10px;
 `;
 

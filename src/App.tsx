@@ -22,14 +22,6 @@ const App: React.FC = () => {
     <Routes>
       <Route path={ModuleRoutes.Home} element={<Home />} />
       <Route
-        path={ModuleRoutes.Secundary}
-        element={
-          <PrivateRoute>
-            {/* <Secundary /> */}
-          </PrivateRoute>
-        }
-      />
-      <Route
         path={`${ModuleRoutes.Resumen}/:productId`}
         element={<Resumen />}
       />

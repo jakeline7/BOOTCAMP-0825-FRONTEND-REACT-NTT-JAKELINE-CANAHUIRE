@@ -5,7 +5,7 @@ Incluye un sistema de **login**, **listado de productos con paginación** y un *
 
 ---
 
-## 📌 Funcionalidades
+##  Funcionalidades
 
  **Login con validaciones**
 - Usuario y contraseña obligatorios.
@@ -31,5 +31,5 @@ Incluye un sistema de **login**, **listado de productos con paginación** y un *
 
 
 
-## 📂 Estructura de carpetas
+
 

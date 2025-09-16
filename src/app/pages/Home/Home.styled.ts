@@ -49,12 +49,28 @@ const LoadingText = styled.div`
   font-size: 20px;
 `;
 
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 20px;
+`;
+
+const NotFoundText = styled.p`
+  color: #555;
+  font-size: 16px;
+  margin-top: 20px;
+`;
+
+
 const HomeStyled = {
   Container,
   Title,
   SearchInput,
   ProductsContainer,
   LoadingText,
+  ErrorMessage,
+  NotFoundText
 };
 
 export default HomeStyled;

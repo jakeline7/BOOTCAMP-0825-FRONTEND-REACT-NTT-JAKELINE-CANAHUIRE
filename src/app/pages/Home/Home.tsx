@@ -4,21 +4,28 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import { Products } from "../../domain/product/product";
 import HomeStyled from "./Home.styled";
 import Pagination from "../../components/Pagination/Pagination";
-import usePagination from "../../../shared/hooks/usePagination"; 
+import usePagination from "../../../shared/hooks/usePagination";
 
 const Home: React.FC = () => {
   const [nameSearch, setNameSearch] = useState("");
   const [products, setProducts] = useState<Products[] | null>(null);
-const [productsSelected, setProductsSelected] = useState<Products[]>([]);
-  
-  const { currentPage, totalPages, currentData, setPage, resetPage } = usePagination<Products>(
-    productsSelected,
-    8
-  );
+  const [productsSelected, setProductsSelected] = useState<Products[]>([]);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const { currentPage, totalPages, currentData, setPage, resetPage } =
+    usePagination<Products>(productsSelected, 8);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const name = e.target.value;
     setNameSearch(name);
+
+    if (name.length > 0 && name.length < 3) {
+      setErrorMessage("Ingresa al menos 3 caracteres para buscar");
+      setProductsSelected(products || []); // vuelve a mostrar todos
+      return;
+    }
+
+    setErrorMessage("");
 
     const newProducts =
       products?.filter((product) =>
@@ -53,19 +60,34 @@ const [productsSelected, setProductsSelected] = useState<Products[]>([]);
         onChange={onChange}
       />
 
+      {errorMessage && (
+        <HomeStyled.ErrorMessage>{errorMessage}</HomeStyled.ErrorMessage>
+      )}
+
       {products?.length ? (
         <>
-          <HomeStyled.ProductsContainer>
-            {currentData?.map((product) => (
-              <ProductCard key={`${product.id}-${product.title}`} product={product as Products} />
-            ))}
-          </HomeStyled.ProductsContainer>
+          {productsSelected.length > 0 ? (
+            <>
+              <HomeStyled.ProductsContainer>
+                {currentData?.map((product) => (
+                  <ProductCard
+                    key={`${product.id}-${product.title}`}
+                    product={product as Products}
+                  />
+                ))}
+              </HomeStyled.ProductsContainer>
 
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={setPage}
-          />
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setPage}
+              />
+            </>
+          ) : (
+            <HomeStyled.NotFoundText>
+              Lo sentimos, no se encontró ningún producto
+            </HomeStyled.NotFoundText>
+          )}
         </>
       ) : (
         <HomeStyled.LoadingText>Cargando productos...</HomeStyled.LoadingText>

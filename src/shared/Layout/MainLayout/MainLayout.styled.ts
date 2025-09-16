@@ -99,6 +99,10 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   min-height: calc(100vh - 90px);
+
+  @media (max-width: 768px) {
+    padding: 20px 30px;
+  }
 `;
 
 const MainLayoutStyled = {

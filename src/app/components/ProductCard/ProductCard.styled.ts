@@ -17,6 +17,10 @@ const Card = styled.div`
   &:hover {
     transform: scale(1.03);
   }
+
+   @media (max-width: 400px) {
+    width:46%;
+  }
 `;
 
 const Header = styled.div`
@@ -28,6 +32,10 @@ const Title = styled.h2`
   font-size: 18px;
   font-weight: bold;
   margin: 5px 0;
+
+  @media (max-width: 400px) {
+    font-size: 13px;
+  }
 `;
 
 const Category = styled.span`
@@ -48,11 +56,19 @@ const ImageContainer = styled.figure`
   display: flex;
   justify-content: center;
   padding: 15px;
+
+  @media (max-width: 400px) {
+    padding: 5px;
+  }
 `;
 
 const ProductImage = styled.img`
   width: 100%;
   object-fit: contain;
+
+  @media (max-width: 400px) {
+    width: 90%;
+  }
 `;
 
 const Button = styled.button`
@@ -72,6 +88,13 @@ const Button = styled.button`
     background-color: ${ColorApp.rojo};
     color: white;
   }
+
+  @media (max-width: 400px) {
+    font-size: 13px;
+    padding: 5px 10px;
+    margin-top: 10px;
+  }
+    
 `;
 
 const ProductCardStyled = {

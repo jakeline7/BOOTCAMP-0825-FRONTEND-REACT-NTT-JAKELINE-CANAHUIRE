@@ -12,7 +12,7 @@ const ProductCard: React.FC<ProductCardI> = ({ product }) => {
   const { title, category, images, id, price } = product;
 
   const toProduct = (): void => {
-    navigate(`${ModuleRoutes.Resumen}/${id}`);
+    navigate(`/${ModuleRoutes.Resumen}/${id}`);
   };
 
   return (

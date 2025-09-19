@@ -3,42 +3,50 @@ import { ModuleRoutes } from "./app/routes";
 import Home from "./app/pages/Home/Home";
 import Resumen from "./app/pages/Resumen/Resumen";
 import Login from "./app/pages/Login/Login";
+import MainLayout from "./shared/Layout/MainLayout/MainLayout.tsx";
 import { FC, PropsWithChildren } from "react";
+import { useLocalStorage } from "./shared/hooks/useLocalStorage";
+import type { LoginResponse } from "./app/proxy/auth-request";
 
 const PrivateRoute: FC<PropsWithChildren> = ({ children }) => {
-  const user = localStorage.getItem("user");
+  const { storedValue: user } = useLocalStorage<LoginResponse | null>("user", null);
+  console.log("Usuario leído en PrivateRoute:", user);
 
-  if (user) {
-    return children;
+  // Validación simple: que exista el objeto y tenga accessToken
+  if (user && (user as LoginResponse).accessToken) {
+    console.log("Usuario válido, acceso permitido:", user);
+    return <>{children}</>;
   }
-
-  return <Navigate to={`/${ModuleRoutes.Login}`} replace />;
+  console.log("Usuario no encontrado, redirigiendo al login");
+  return <Navigate to="/login" replace />;
 };
 
 const App: React.FC = () => {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to={`/${ModuleRoutes.Login}`} replace />} />
       <Route path={ModuleRoutes.Login} element={<Login />} />
-
       <Route
-        path={ModuleRoutes.Home}
+        path={`/${ModuleRoutes.Home}`}
         element={
           <PrivateRoute>
-            <Home />
+            <MainLayout>
+              <Home />
+            </MainLayout>
           </PrivateRoute>
         }
       />
-
       <Route
         path={`${ModuleRoutes.Resumen}/:productId`}
         element={
           <PrivateRoute>
-            <Resumen />
+            <MainLayout>
+              <Resumen />
+            </MainLayout>
           </PrivateRoute>
         }
       />
-
-      <Route path="*" element={<Navigate to={ModuleRoutes.Login} replace />} />
+      <Route path="*" element={<Navigate to={`/${ModuleRoutes.Login}`} replace />} />
     </Routes>
   );
 };

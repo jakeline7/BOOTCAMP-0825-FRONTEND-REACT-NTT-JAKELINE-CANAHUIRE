@@ -22,7 +22,8 @@ const LoginForm: React.FC = () => {
     try {
       const data = await authRequest.login(username, password);
       setUser(data); 
-      navigate("/productos"); 
+      console.log("Guardado en localStorage:", data);
+      navigate("/home"); 
     } catch {
       setErrorMessage("Usuario o contraseña inválidos");
     }

@@ -10,8 +10,7 @@ const MainLayout: React.FC<MainLayoutI> = ({ children }) => {
   return (
     <MainLayoutStyled.MainLayout>
       <MainLayoutStyled.Header>
-        {/* Logo que lleva al Home */}
-        <MainLayoutStyled.LogoLink to={ModuleRoutes.Home}>
+        <MainLayoutStyled.LogoLink to={`/${ModuleRoutes.Home}`}>
           <img src={LogoPlazaVea} alt="logoPlazaVea" />
         </MainLayoutStyled.LogoLink>
 

@@ -1,5 +1,5 @@
 export const enum ModuleRoutes {
-  Home = "",
+  Home = "home",
   Resumen = "resumen",
   Login="login"
 }

@@ -1,69 +1,35 @@
-# React + TypeScript + Vite
+# 🛒 Proyecto de Tienda con React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una aplicación web de tienda básica que consume la API de [DummyJSON](https://dummyjson.com/).  
+Incluye un sistema de **login**, **listado de productos con paginación** y un **detalle de producto (resumen)**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Funcionalidades
 
-## Expanding the ESLint configuration
+ **Login con validaciones**
+- Usuario y contraseña obligatorios.
+- El botón de iniciar sesión se habilita solo si los campos son válidos.
+- Validación de usuario y contraseña mínima de 4 caracteres.
+- Si el login es exitoso, se guarda la sesión en `localStorage` y se redirige al **Home**.
+- Si las credenciales son incorrectas, muestra un mensaje de error en el formulario.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Home (Productos)**
+- Muestra un buscador con validación mínima de **3 caracteres**.
+- Si no hay coincidencias, aparece el mensaje *“No se encontró el producto”*.
+- Los productos se listan en **cards** con: título, categoría, precio y botón “Agregar”.
+- Incluye **paginación**, mostrando 8 productos por página.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+**Resumen (Detalle del producto)**
+- Página con la información del producto seleccionado (imagen, título y descripción).
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+ **Header dinámico**
+- Incluye icono de carrito.
+- Opción para cerrar sesión (limpia el `localStorage` y redirige a login).
+- El logo redirige a Home de listado de productos
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+
+

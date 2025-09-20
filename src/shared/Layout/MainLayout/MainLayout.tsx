@@ -3,10 +3,14 @@ import { ModuleRoutes } from "../../../app/routes";
 import LogoPlazaVea from "../../../assets/LogoPlazaVea.svg";
 import Carrito from "../../../assets/carrito.png";
 import MainLayoutStyled from "./MainLayout.styled";
+import { useLocalStorage } from "../../../shared/hooks/useLocalStorage";
+import type { LoginResponse } from "../../../app/proxy/auth-request";
 
 interface MainLayoutI extends PropsWithChildren {}
 
 const MainLayout: React.FC<MainLayoutI> = ({ children }) => {
+  const { storedValue: user } = useLocalStorage<LoginResponse | null>("user", null);
+
   return (
     <MainLayoutStyled.MainLayout>
       <MainLayoutStyled.Header>
@@ -16,10 +20,14 @@ const MainLayout: React.FC<MainLayoutI> = ({ children }) => {
 
         <nav>
           <MainLayoutStyled.NavList>
-            <MainLayoutStyled.Greeting>Hola Emily</MainLayoutStyled.Greeting>
+            {user ? (
+              <MainLayoutStyled.Greeting>
+                Hola, {user.firstName}
+              </MainLayoutStyled.Greeting>
+            ) : null}
 
             <MainLayoutStyled.NavItem>
-              <MainLayoutStyled.NavLink to={ModuleRoutes.Resumen}>
+              <MainLayoutStyled.NavLink to={`/${ModuleRoutes.Resumen}`}>
                 <MainLayoutStyled.CartIcon src={Carrito} alt="miCarrito" />
               </MainLayoutStyled.NavLink>
             </MainLayoutStyled.NavItem>

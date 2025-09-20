@@ -27,7 +27,17 @@
     /* Alias paths */
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+
+    /*Para Jest y Testing Library */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["jest", "node"]
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "jest.setup.ts",
+    "src/**/*.test.ts",
+    "src/**/*.test.tsx"
+  ]
 }
